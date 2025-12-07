@@ -1,0 +1,80 @@
+{
+  "app": {
+    "title": "ٹوڈو ایپلیکیشن",
+    "subtitle": "آپ کا پیداواری ساتھی",
+    "goodbye": "ٹوڈو ایپلیکیشن استعمال کرنے کا شکریہ! الوداع! 👋"
+  },
+  "menu": {
+    "title": "مین مینو",
+    "view_all": "تمام کام دیکھیں",
+    "add_task": "نیا کام شامل کریں",
+    "update_task": "کام اپ ڈیٹ کریں",
+    "delete_task": "کام حذف کریں",
+    "complete_task": "کام مکمل کریں",
+    "search_tasks": "کام تلاش کریں",
+    "filter_tasks": "کام فلٹر کریں",
+    "view_details": "کام کی تفصیلات دیکھیں",
+    "exit": "باہر نکلیں",
+    "choice_prompt": "اپنی پسند درج کریں"
+  },
+  "task": {
+    "id": "شناخت",
+    "title": "عنوان",
+    "description": "تفصیل",
+    "status": "حیثیت",
+    "priority": "ترجیح",
+    "tags": "ٹیگز",
+    "due_date": "آخری تاریخ",
+    "created": "بنایا گیا",
+    "completed": "مکمل ہوا",
+    "recurrence": "تکرار"
+  },
+  "status": {
+    "pending": "⏳ زیر التواء",
+    "completed": "✅ مکمل"
+  },
+  "priority": {
+    "low": "کم",
+    "medium": "درمیانہ",
+    "high": "زیادہ"
+  },
+  "prompts": {
+    "enter_title": "کام کا عنوان درج کریں",
+    "enter_description": "تفصیل درج کریں (اختیاری)",
+    "enter_priority": "ترجیح درج کریں (کم/درمیانہ/زیادہ)",
+    "enter_tags": "ٹیگز درج کریں (کوما سے الگ، اختیاری)",
+    "enter_due_date": "آخری تاریخ درج کریں (YYYY-MM-DD HH:MM، اختیاری)",
+    "enter_recurrence": "تکرار درج کریں (کوئی نہیں/روزانہ/ہفتہ وار/ماہانہ)",
+    "enter_task_id": "کام کی شناخت درج کریں",
+    "enter_search_query": "تلاش کا لفظ درج کریں",
+    "confirm_delete": "کیا آپ واقعی اس کام کو حذف کرنا چاہتے ہیں؟"
+  },
+  "messages": {
+    "task_created": "کام کامیابی سے بنایا گیا! شناخت: {id}",
+    "task_updated": "کام کامیابی سے اپ ڈیٹ ہوا!",
+    "task_deleted": "کام {id} کامیابی سے حذف ہوا!",
+    "task_completed": "کام {id} مکمل کے طور پر نشان زد!",
+    "task_not_found": "کام {id} نہیںملا",
+    "no_tasks": "دکھانے کے لیے کوئی کام نہیں۔",
+    "invalid_choice": "غلط انتخاب۔ براہ کرم دوبارہ کوشش کریں۔",
+    "title_required": "عنوان خالی نہیں ہو سکتا",
+    "invalid_id": "غلط کام کی شناخت",
+    "deletion_cancelled": "حذف منسوخ کر دیا گیا",
+    "search_query_required": "تلاش کا سوال خالی نہیں ہو سکتا"
+  },
+  "statistics": {
+    "title": "📊 اعدادوشمار",
+    "total": "کل کام",
+    "pending": "زیر التواء",
+    "completed": "مکمل",
+    "overdue": "تاریخ گزر گئی"
+  },
+  "filter": {
+    "by_status": "حیثیت کے مطابق فلٹر کریں",
+    "by_priority": "ترجیح کے مطابق فلٹر کریں",
+    "by_tag": "ٹیگ کے مطابق فلٹر کریں",
+    "enter_status": "حیثیت درج کریں (زیر التواء/مکمل)",
+    "enter_priority": "ترجیح درج کریں (کم/درمیانہ/زیادہ)",
+    "enter_tag": "ٹیگ درج کریں"
+  }
+}

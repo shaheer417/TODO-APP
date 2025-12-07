@@ -1,0 +1,80 @@
+{
+  "app": {
+    "title": "APLICACIÓN DE TAREAS",
+    "subtitle": "Tu Compañero de Productividad",
+    "goodbye": "¡Gracias por usar la Aplicación de Tareas! ¡Adiós! 👋"
+  },
+  "menu": {
+    "title": "MENÚ PRINCIPAL",
+    "view_all": "Ver Todas las Tareas",
+    "add_task": "Agregar Nueva Tarea",
+    "update_task": "Actualizar Tarea",
+    "delete_task": "Eliminar Tarea",
+    "complete_task": "Completar Tarea",
+    "search_tasks": "Buscar Tareas",
+    "filter_tasks": "Filtrar Tareas",
+    "view_details": "Ver Detalles de Tarea",
+    "exit": "Salir",
+    "choice_prompt": "Ingrese su elección"
+  },
+  "task": {
+    "id": "ID",
+    "title": "Título",
+    "description": "Descripción",
+    "status": "Estado",
+    "priority": "Prioridad",
+    "tags": "Etiquetas",
+    "due_date": "Fecha Límite",
+    "created": "Creado",
+    "completed": "Completado",
+    "recurrence": "Recurrencia"
+  },
+  "status": {
+    "pending": "⏳ Pendiente",
+    "completed": "✅ Completado"
+  },
+  "priority": {
+    "low": "BAJA",
+    "medium": "MEDIA",
+    "high": "ALTA"
+  },
+  "prompts": {
+    "enter_title": "Ingrese el título de la tarea",
+    "enter_description": "Ingrese la descripción (opcional)",
+    "enter_priority": "Ingrese la prioridad (baja/media/alta)",
+    "enter_tags": "Ingrese etiquetas (separadas por comas, opcional)",
+    "enter_due_date": "Ingrese la fecha límite (YYYY-MM-DD HH:MM, opcional)",
+    "enter_recurrence": "Ingrese la recurrencia (ninguna/diaria/semanal/mensual)",
+    "enter_task_id": "Ingrese el ID de la tarea",
+    "enter_search_query": "Ingrese la palabra clave de búsqueda",
+    "confirm_delete": "¿Está seguro de que desea eliminar esta tarea?"
+  },
+  "messages": {
+    "task_created": "¡Tarea creada exitosamente! ID: {id}",
+    "task_updated": "¡Tarea actualizada exitosamente!",
+    "task_deleted": "¡Tarea {id} eliminada exitosamente!",
+    "task_completed": "¡Tarea {id} marcada como completada!",
+    "task_not_found": "Tarea {id} no encontrada",
+    "no_tasks": "No hay tareas para mostrar.",
+    "invalid_choice": "Elección no válida. Por favor, inténtelo de nuevo.",
+    "title_required": "El título no puede estar vacío",
+    "invalid_id": "ID de tarea no válido",
+    "deletion_cancelled": "Eliminación cancelada",
+    "search_query_required": "La consulta de búsqueda no puede estar vacía"
+  },
+  "statistics": {
+    "title": "📊 Estadísticas",
+    "total": "Tareas Totales",
+    "pending": "Pendientes",
+    "completed": "Completadas",
+    "overdue": "Vencidas"
+  },
+  "filter": {
+    "by_status": "Filtrar por Estado",
+    "by_priority": "Filtrar por Prioridad",
+    "by_tag": "Filtrar por Etiqueta",
+    "enter_status": "Ingrese el estado (pendiente/completado)",
+    "enter_priority": "Ingrese la prioridad (baja/media/alta)",
+    "enter_tag": "Ingrese la etiqueta"
+  }
+}
