@@ -35,15 +35,18 @@
 - Configurable via environment variables
 - Gmail SMTP integration
 
+✅ **Voice Input**
+- Create tasks using voice commands (🎤 Option 9 in menu)
+- Speech-to-text for task title and description
+- Google Speech API with automatic fallback
+- Microphone detection and status checking
+- Requires: SpeechRecognition and PyAudio libraries
+
 ### Planned Features
 
 🔜 **Natural Language Input** (User Story 3)
 - Parse dates from natural language (e.g., "tomorrow", "next Friday")
 - Extract priorities from keywords (e.g., "important", "urgent")
-
-🔜 **Voice Input** (User Story 4)
-- Create tasks via speech-to-text
-- Google Speech API with offline fallback
 
 🔜 **Multi-Language Support** (User Story 5)
 - English, Urdu, and Spanish translations
@@ -116,11 +119,19 @@
 
 ## Usage
 
-Run the application:
+### Running the Application
 
+**Windows Command Prompt (Recommended):**
+```bash
+run_windows.bat
+```
+
+**Any Platform:**
 ```bash
 python -m todo_app.main
 ```
+
+**Note for Windows Users:** If you see encoding errors or emojis don't display correctly in Command Prompt, use `run_windows.bat` which automatically configures UTF-8 encoding.
 
 ### Quick Start
 
@@ -141,6 +152,29 @@ No configuration needed - notifications are sent automatically when you view or 
 
 For email setup instructions, see: [Email Notifications Guide](docs/EMAIL_NOTIFICATIONS.md)
 
+### Voice Input
+
+Create tasks hands-free using voice commands! Select option **9** from the main menu.
+
+**Requirements:**
+```bash
+pip install SpeechRecognition PyAudio
+```
+
+**How to use:**
+1. Select `9` from the main menu (🎤 Add Task by Voice)
+2. Speak your task title clearly when prompted
+3. Optionally add a description via voice
+4. Complete other details (priority, tags, due date) via keyboard
+
+**Features:**
+- Uses Google Speech API for accurate transcription
+- Automatic fallback to offline recognition
+- Microphone status detection
+- Real-time feedback on recognized speech
+
+**Note:** Requires a working microphone. If voice input is unavailable, the app will show a helpful error message with installation instructions.
+
 ## Testing
 
 Run tests:
@@ -154,9 +188,9 @@ Run tests:
 
 ### Running the Application
 
-**Windows (Recommended):**
+**Windows Command Prompt:**
 ```bash
-run.bat
+run_windows.bat
 ```
 
 **Any Platform:**
@@ -164,15 +198,12 @@ run.bat
 python -m todo_app.main
 ```
 
-**Simple Launcher:**
-```bash
-python run.py
-```
-
 ### 🐛 Common Issues
 
-**Unicode/Emoji not displaying:**
-- Windows: Use **Windows Terminal** (not cmd.exe) or run `run.bat`
+**Unicode/Emoji not displaying in Windows Command Prompt:**
+- **Solution 1 (Recommended):** Use `run_windows.bat` launcher which automatically sets UTF-8 encoding
+- **Solution 2:** Use **Windows Terminal** instead of cmd.exe
+- **Solution 3:** Manually set code page: `chcp 65001` before running the app
 - macOS/Linux: Ensure terminal supports UTF-8
 
 **"EOF when reading a line" error:**
@@ -194,6 +225,7 @@ python run.py
 6. Search Tasks         - Find tasks by keyword
 7. Filter Tasks         - Filter by status, priority, or tag
 8. View Task Details    - See detailed task information
+9. Add Task by Voice    - Create tasks using voice input 🎤
 0. Exit                 - Close the application
 ```
 

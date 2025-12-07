@@ -182,6 +182,7 @@ class UIAgent:
             ("[grey35 on grey89] 6 [/grey35 on grey89]", "[grey35]🔍 Search Tasks[/grey35]"),
             ("[grey35 on grey89] 7 [/grey35 on grey89]", "[grey35]🔎 Filter Tasks[/grey35]"),
             ("[grey35 on grey89] 8 [/grey35 on grey89]", "[grey35]📖 View Task Details[/grey35]"),
+            ("[grey35 on grey89] 9 [/grey35 on grey89]", "[grey35]🎤 Add Task by Voice[/grey35]"),
             ("[white on grey50] 0 [/white on grey50]", "[grey35]🚪 Exit Application[/grey35]"),
         ]
 

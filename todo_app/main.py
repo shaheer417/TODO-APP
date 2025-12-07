@@ -9,12 +9,32 @@ import os
 
 # Fix Windows console encoding for Unicode/emoji support
 if sys.platform == 'win32':
+    # Set console code page to UTF-8 (65001)
+    try:
+        import subprocess
+        subprocess.run(['chcp', '65001'], shell=True, capture_output=True)
+    except Exception:
+        pass
+
     # Set console to UTF-8 mode
     if hasattr(sys.stdout, 'reconfigure'):
-        sys.stdout.reconfigure(encoding='utf-8')
-        sys.stderr.reconfigure(encoding='utf-8')
+        try:
+            sys.stdout.reconfigure(encoding='utf-8')
+            sys.stderr.reconfigure(encoding='utf-8')
+        except Exception:
+            pass
+
     # Set environment variable for UTF-8
     os.environ['PYTHONIOENCODING'] = 'utf-8'
+
+    # Enable ANSI escape sequences in Windows Command Prompt
+    try:
+        import ctypes
+        kernel32 = ctypes.windll.kernel32
+        # Enable Virtual Terminal Processing
+        kernel32.SetConsoleMode(kernel32.GetStdHandle(-11), 7)
+    except Exception:
+        pass
 
 # Load environment variables from .env file
 from dotenv import load_dotenv
@@ -26,6 +46,7 @@ from typing import Optional
 from todo_app.agents.task_manager import TaskManager
 from todo_app.agents.ui_agent import UIAgent
 from todo_app.agents.email_agent import EmailAgent
+from todo_app.agents.voice_agent import VoiceAgent
 from todo_app.models.task import Priority, Status, Recurrence
 
 
@@ -41,6 +62,7 @@ class TodoApp:
         self.task_manager = TaskManager()
         self.ui_agent = UIAgent()
         self.email_agent = EmailAgent()
+        self.voice_agent = VoiceAgent()
         self.running = True
 
     def run(self) -> None:
@@ -81,6 +103,7 @@ class TodoApp:
             "6": self._search_tasks,
             "7": self._filter_tasks,
             "8": self._view_task_details,
+            "9": self._add_task_by_voice,
             "0": self._exit_app
         }
 
@@ -346,6 +369,89 @@ class TodoApp:
             self.ui_agent.display_task_details_skill(task)
         else:
             self.ui_agent.display_error_skill(f"Task {task_id} not found")
+
+    def _add_task_by_voice(self) -> None:
+        """Add a new task using voice input."""
+        self.ui_agent.display_header_skill("Add Task by Voice")
+
+        # Check if voice input is available
+        if not self.voice_agent.is_available_skill():
+            status_msg = self.voice_agent.get_status_message_skill()
+            self.ui_agent.display_error_skill(status_msg)
+            return
+
+        # Display voice input status
+        self.ui_agent.display_message_skill("🎤 Voice input ready!", "green")
+        self.ui_agent.display_message_skill("🗣️  Speak your task title clearly...", "grey35")
+
+        # Get title via voice
+        title = self.voice_agent.listen_and_transcribe_skill(timeout=5, phrase_time_limit=10)
+        if not title:
+            self.ui_agent.display_error_skill("No speech detected or couldn't understand. Please try again.")
+            return
+
+        self.ui_agent.display_message_skill(f"✅ Recognized: {title}", "green")
+
+        # Ask if user wants to add description via voice
+        add_description = self.ui_agent.prompt_input_skill(
+            "Add description via voice? (yes/no)",
+            default="no"
+        ).lower()
+
+        description = None
+        if add_description in ["yes", "y"]:
+            self.ui_agent.display_message_skill("🗣️  Speak the description...", "grey35")
+            description = self.voice_agent.listen_and_transcribe_skill(timeout=5, phrase_time_limit=15)
+            if description:
+                self.ui_agent.display_message_skill(f"✅ Recognized: {description}", "green")
+
+        # Get other details via text input (for better accuracy)
+        priority_input = self.ui_agent.prompt_input_skill(
+            "Enter priority (low/medium/high)",
+            default="medium"
+        ).lower()
+        priority_map = {"low": Priority.LOW, "medium": Priority.MEDIUM, "high": Priority.HIGH}
+        priority = priority_map.get(priority_input, Priority.MEDIUM)
+
+        tags_input = self.ui_agent.prompt_input_skill("Enter tags (comma-separated, optional)")
+        tags = [tag.strip() for tag in tags_input.split(",")] if tags_input else []
+
+        due_date_input = self.ui_agent.prompt_input_skill(
+            "Enter due date (YYYY-MM-DD HH:MM, optional)"
+        )
+        due_date = None
+        if due_date_input:
+            try:
+                due_date = datetime.strptime(due_date_input, "%Y-%m-%d %H:%M")
+            except ValueError:
+                self.ui_agent.display_error_skill("Invalid date format. Due date not set.")
+
+        recurrence_input = self.ui_agent.prompt_input_skill(
+            "Enter recurrence (none/daily/weekly/monthly)",
+            default="none"
+        ).lower()
+        recurrence_map = {
+            "none": Recurrence.NONE,
+            "daily": Recurrence.DAILY,
+            "weekly": Recurrence.WEEKLY,
+            "monthly": Recurrence.MONTHLY
+        }
+        recurrence = recurrence_map.get(recurrence_input, Recurrence.NONE)
+
+        # Create task
+        task = self.task_manager.add_task_skill(
+            title=title,
+            description=description,
+            priority=priority,
+            tags=tags,
+            due_date=due_date,
+            recurrence=recurrence
+        )
+
+        self.ui_agent.display_success_skill(f"Task added successfully! (ID: {task.id})")
+
+        # Check if email notification should be sent
+        self.email_agent.check_and_notify_task_skill(task)
 
     def _exit_app(self) -> None:
         """Exit the application."""
